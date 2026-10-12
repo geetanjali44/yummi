@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yummi Splash</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.splash {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: scale(.95);
+    animation: settle .4s ease 2.6s forwards;
+}
+
+.logo::after {
+    content: "";
+    position: absolute;
+    width: 96%;
+    height: 30px;
+    left: -15%;
+    bottom: 49px;
+    border-top: 5px solid #17105f;
+    border-radius: 50%;
+    transform: rotate(-17deg);
+    pointer-events: none;
+
+    /* Same line animation */
+    clip-path: inset(0 100% 0 0);
+    animation: stemDraw 0.7s ease-out 1.15s forwards;
+}
+
+@keyframes stemDraw {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+.word-area {
+    position: relative;
+    padding-bottom: 48px;
+}
+
+.word {
+    display: flex;
+    white-space: nowrap;
+    color: #21136d;
+    font-family: 'Henny Penny', cursive;
+    font-size: clamp(65px, 13vw, 105px);
+    letter-spacing: -5px;
+}
+
+.letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-30px) scale(.3);
+    animation: letterIn .22s cubic-bezier(.2,1.5,.4,1) forwards;
+}
+
+.letter:nth-child(1) { animation-delay: .1s; }
+.letter:nth-child(2) { animation-delay: .3s; }
+.letter:nth-child(3) { animation-delay: .5s; }
+.letter:nth-child(4) { animation-delay: .7s; }
+.letter:nth-child(5) { animation-delay: .9s; }
+
+
+
+
+/* Replace character.png with your own PNG file */
+
+.character {
+    display: block;
+    width: 75px;
+    height: auto;
+    object-fit: contain;
+    margin-left: 8px;
+    opacity: 0;
+    animation: characterAppear 0.4s ease 1.8s forwards;
+}
+
+@keyframes characterAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.heart {
+    position: absolute;
+    top: -14px;
+    right: 4px;
+    font: 22px Arial;
+    color: #21136d;
+    opacity: 0;
+    animation: heartPop .3s ease 2.1s forwards;
+}
+
+.spark {
+    position: absolute;
+    color: #21136d;
+    font-size: 17px;
+    opacity: 0;
+    animation: sparkle .5s ease 2s forwards;
+}
+
+.spark1 {
+    top: -14px;
+    left: 15%;
+}
+
+.spark2 {
+    bottom: 8px;
+    left: 2%;
+    animation-delay: 2.15s;
+}
+
+.spark3 {
+    right: -5px;
+    top: 35px;
+    animation-delay: 2.25s;
+}
+
+@keyframes letterIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px) scale(.3);
+    }
+    70% {
+        opacity: 1;
+        transform: translateX(3px) scale(1.12);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes pop {
+    0% {
+        opacity: 0;
+        transform: scale(.2) rotate(-15deg);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.2) rotate(7deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -5px; }
+}
+
+@keyframes heartPop {
+    0% { opacity: 0; transform: scale(0); }
+    70% { opacity: 1; transform: scale(1.4); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes sparkle {
+    0% { opacity: 0; transform: scale(0) rotate(0); }
+    60% { opacity: 1; transform: scale(1.3) rotate(80deg); }
+    100% { opacity: 1; transform: scale(1) rotate(120deg); }
+}
+
+@keyframes settle {
+    0% { transform: scale(.95); }
+    70% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+@media(max-width:480px) {
+    .logo {
+        transform: scale(.82);
+        animation: mobileSettle .4s ease 2.6s forwards;
+    }
+
+    .word {
+        font-size: clamp(58px, 15vw, 75px);
+        letter-spacing: -4px;
+    }
+
+    .word-area {
+        padding-bottom: 38px;
+    }
+
+   
+
+    .character {
+        width: 75px;
+    }
+
+    @keyframes mobileSettle {
+        0% { transform: scale(.82); }
+        70% { transform: scale(.88); }
+        100% { transform: scale(.85); }
+    }
+}
+
+@media (max-width: 480px) {
+    .logo::after {
+        width: 87%;
+        height: 14px;
+        left: -15%;
+        bottom: 40px;
+        border-top: 4px solid #17105f;
+        border-radius: 50%;
+        transform: rotate(-17deg);
+
+        clip-path: inset(0 0 100% 0);
+        animation: stemDrawMobile 0.7s ease-out 1.15s forwards;
+    }
+}
+
+@keyframes stemDrawMobile {
+    from {
+        clip-path: inset(0 0 100% 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="splash">
+    <div class="logo">
+
+        <div class="word-area">
+            <div class="word">
+                <span class="letter">Y</span>
+                <span class="letter">u</span>
+                <span class="letter">m</span>
+                <span class="letter">m</span>
+                <span class="letter">i</span>
+            </div>
+
+        
+        </div>
+
+        <!-- Place your transparent character PNG in this folder -->
+        <div style="position:relative">
+            <img class="character"
+                 src="yummi_char.webp"
+                 alt="Yummi mascot">
+
+            
+        </div>
+
+    </div>
+</div>
+
+<!--
+<script>
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 3000);
+</script>
+-->
+
+</body>
+</html>

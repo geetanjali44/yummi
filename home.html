@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yummi Home</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
+
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* FULL-WIDTH LOCATION AREA */
+.location-section {
+    width: 100%;
+    min-height: 125px;
+    padding: 12px 14px 14px;
+    background: #ffd06cf3;
+    position: relative;
+    display: block;
+}
+
+/* LOCATION ROW */
+.location-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.location-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #80501f;
+    background: #f1dfbd;
+    border-radius: 50%;
+    font-size: 17px;
+}
+
+.location-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.location-name {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #302116;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.location-address {
+    color: #92765a;
+    font-size: 11px;
+    margin-top: 4px;
+    line-height: 1.4;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* CHARACTER */
+.character {
+    width: 48px;
+    height: 55px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform-origin: bottom center;
+    transition: transform 0.25s ease;
+}
+
+.character img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* PROFILE */
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 1px solid #ead9bd;
+    border-radius: 50%;
+    background: #fff;
+    color: #80501f;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-icon:active {
+    transform: scale(.96);
+}
+
+/* SEARCH BOX UNDER LOCATION ROW */
+.search-row {
+    display: block;
+    width: calc(100% - 58px);
+    margin-top: 12px;
+}
+
+.search-box {
+    width: 100%;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 13px;
+    background: #fff;
+    border: 1px solid #eadfc9;
+    border-radius: 12px;
+    color: #987650;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #302116;
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: #aa9a85;
+}
+
+/* FLOATING CHARACTER MESSAGE:
+   Absolute positioning means the section height does not change. */
+.character-wish {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    z-index: 100;
+    width: max-content;
+    max-width: calc(100% - 32px);
+    padding: 9px 15px;
+    border: 1px solid #eadfc9;
+    border-radius: 18px;
+    background: #fff;
+    color: #6b421e;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(100, 65, 20, .12);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(8px) scale(.3);
+}
+
+.character-wish.show {
+    visibility: visible;
+    animation: sprinklePop 2s ease forwards;
+}
+
+@keyframes sprinklePop {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px) scale(.3);
+    }
+    18% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-4px) scale(1.08);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    78% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-2px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) translateY(-12px) scale(.85);
+    }
+}
+
+/* CHARACTER BOUNCE */
+.character.bounce {
+    animation: characterMove .65s ease;
+}
+
+@keyframes characterMove {
+    0%   { transform: translateY(0) rotate(0); }
+    20%  { transform: translateY(-13px) rotate(-8deg); }
+    40%  { transform: translateY(-5px) rotate(8deg); }
+    60%  { transform: translateY(-10px) rotate(-5deg); }
+    80%  { transform: translateY(-3px) rotate(3deg); }
+    100% { transform: translateY(0) rotate(0); }
+}
+
+/* HOME CONTENT */
+.home-content {
+    width: 100%;
+    min-height: calc(100vh - 125px);
+    padding: 16px;
+}
+
+/* PC RESPONSIVE */
+@media (min-width: 768px) {
+    .location-section {
+        padding: 14px 28px;
+        min-height: 133px;
+    }
+
+    .location-row {
+        gap: 16px;
+    }
+
+    .location-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .location-name {
+        font-size: 15px;
+    }
+
+    .location-address {
+        font-size: 12px;
+    }
+
+    .character {
+        width: 52px;
+        height: 60px;
+    }
+
+    .profile-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .search-row {
+        width: calc(100% - 70px);
+    }
+
+    .home-content {
+        min-height: calc(100vh - 133px);
+        padding: 24px 28px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .character-wish.show,
+    .character.bounce {
+        animation-duration: .01ms;
+    }
+}
+
+/* YUMMI BANNER */
+.yummi-banner {
+    width: 100%;
+    min-height: 175px;
+    margin: 0;
+    padding: 20px 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    background: linear-gradient(180deg, #ffd06cf3, #f6e5c235);
+
+    border-radius: 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-content {
+    flex: 1;
+    min-width: 0;
+    z-index: 1;
+}
+
+.banner-tag {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #49621b;
+    margin-bottom: 10px;
+}
+
+.banner-content h2 {
+    font-size: clamp(23px, 6vw, 32px);
+    line-height: 1.12;
+    font-weight: 900;
+    color: #253713;
+    margin-bottom: 9px;
+}
+
+.banner-content h2 span {
+    color: #668b20;
+}
+
+.banner-description {
+    max-width: 190px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #465533;
+}
+
+.banner-image {
+    width: 42%;
+    max-width: 155px;
+    flex-shrink: 0;
+}
+
+.banner-image img {
+    display: block;
+    width: 100%;
+    height: 135px;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .yummi-banner {
+        min-height: 230px;
+        padding: 28px 35px;
+    }
+
+    .banner-content h2 {
+        font-size: 38px;
+    }
+
+    .banner-tag {
+        font-size: 11px;
+    }
+
+    .banner-description {
+        font-size: 13px;
+    }
+
+    .banner-image img {
+        height: 190px;
+    }
+}
+/* MOBILE VIEW ONLY */
+@media screen and (max-width: 767px) {
+
+    .yummi-banner {
+        height: 120px !important;
+        min-height: 120px !important;
+        padding: 8px 12px !important;
+        margin: 0 !important;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .banner-content h2 {
+        font-size: 21px !important;
+        line-height: 1.05 !important;
+        margin-bottom: 4px !important;
+    }
+
+    .banner-tag {
+        font-size: 8px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .banner-description {
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+    }
+
+    .banner-image {
+        width: 36% !important;
+        max-width: 110px !important;
+        flex-shrink: 0;
+    }
+
+    .banner-image img {
+        width: 100% !important;
+        height: 100px !important;
+        max-height: 100px !important;
+        object-fit: contain;
+    }
+}
+
+
+
+
+.cravings-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow: hidden;
+  font-family: 'Henny Penny', cursive;
+    margin: 15px 0;
+    transform: translateY(-15px);
+}
+
+.cravings-heading h2 {
+    flex-shrink: 0;
+    margin: 0;
+    font-size: 21px;
+    font-weight: 800;
+    color: #293b24;
+    white-space: nowrap;
+}
+
+.cravings-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    height: 30px;
+}
+
+.cravings-icons span {
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 19px;
+    animation: cravingsSlide 5s linear infinite;
+}
+
+.cravings-icons span:nth-child(2) {
+    animation-delay: -1s;
+}
+
+.cravings-icons span:nth-child(3) {
+    animation-delay: -2s;
+}
+
+.cravings-icons span:nth-child(4) {
+    animation-delay: -3s;
+}
+
+.cravings-icons span:nth-child(5) {
+    animation-delay: -4s;
+}
+
+@keyframes cravingsSlide {
+    0%, 15% {
+        opacity: 0.3;
+        transform: translateY(7px) scale(0.8);
+    }
+
+    30%, 65% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    80%, 100% {
+        opacity: 0.3;
+        transform: translateY(-7px) scale(0.8);
+    }
+}
+
+
+/* FOOD CATEGORIES */
+.food-categories {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 5px 4px 12px;
+    margin-top: -8px;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.food-categories::-webkit-scrollbar {
+    display: none;
+}
+
+/* CATEGORY ITEM */
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex: 0 0 72px;
+    gap: 8px;
+
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #555;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+/* CATEGORY IMAGE */
+.category img {
+    display: block;
+    width: 68px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+
+    transition: transform 0.2s ease;
+}
+
+/* CATEGORY NAME */
+.category span {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* ACTIVE CATEGORY */
+.category.active {
+    color: #293b24;
+    font-weight: 700;
+}
+
+.category.active img {
+    outline: 2px solid #668b20;
+    outline-offset: 3px;
+}
+
+/* CLICK EFFECT */
+.category:active img {
+    transform: scale(0.94);
+}
+
+/* TABLET AND DESKTOP */
+@media (min-width: 768px) {
+    .food-categories {
+        gap: 28px;
+    }
+
+    .category {
+        flex-basis: 85px;
+        font-size: 13px;
+    }
+
+    .category img {
+        width: 78px;
+        height: 78px;
+    }
+}
+
+.category-page {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    background: #fff;
+    z-index: 99999;
+    overflow-y: auto;
+
+    clip-path: circle(0 at 100% 100%);
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: clip-path 1.5s cubic-bezier(.22, 1, .36, 1);
+}
+
+.category-page.open {
+    clip-path: circle(150vmax at 100% 100%);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.category-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 16px;
+    background: #fff;
+    z-index: 2;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding: 16px;
+    background: #fff;
+}
+
+#goldReveal {
+    position: fixed;
+    inset: 0;
+    background: #f7b737;
+    z-index: 100000;
+    pointer-events: none;
+
+    clip-path: circle(0 at 100% 100%);
+    visibility: hidden;
+    opacity: 1;
+}
+
+#goldReveal.show {
+    clip-path: circle(150vmax at 100% 100%);
+    visibility: visible;
+    transition: clip-path 1.5s cubic-bezier(.22, 1, .36, 1);
+}
+
+#goldReveal.hide {
+    clip-path: circle(150vmax at 100% 100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility 0s linear .2s;
+}
+
+.food-love-row {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.food-love-box {
+    position: relative;
+    flex: 1;
+    height: 110px;
+    margin-top: 12px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.food-love-box img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.veggie-box {
+     background: linear-gradient(180deg, #cdf6c235,  #aeff6cf3);
+}
+
+.nonveg-box {
+     background: linear-gradient(180deg, #f6cec235, #ff716cf3);
+}
+
+.food-love-sticker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 9px;
+    border-radius: 6px;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: emoji;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.veggie-sticker {
+    background: #4b7838;
+}
+
+.nonveg-sticker {
+    background: #c74747;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FULL-WIDTH LOCATION AREA -->
+<div class="location-section">
+
+    <!-- LOCATION ROW -->
+    <div class="location-row">
+
+        <div class="location-icon">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+
+        <div class="location-details">
+            <div class="location-name">
+                <span id="locationName">Finding location...</span>
+                <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i>
+            </div>
+
+            <div class="location-address" id="locationAddress">
+                Please allow location access
+            </div>
+        </div>
+
+        <div class="character"
+             id="yummiCharacter"
+             role="button"
+             tabindex="0"
+             aria-label="Tap the Yummi character for a greeting">
+            <img src="yummi_char.webp" alt="Yummi character">
+        </div>
+
+        <button class="profile-icon"
+                type="button"
+                aria-label="Open profile"
+                onclick="openProfile()">
+            <i class="fa-regular fa-user"></i>
+        </button>
+
+    </div>
+
+    <!-- SEARCH BOX BELOW THE LOCATION ROW -->
+    <div class="search-row">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+                type="search"
+                id="yummiSearch"
+                placeholder="Search for anything yummy..."
+                aria-label="Search products">
+        </div>
+    </div>
+
+    <!-- FLOATING MESSAGE; DOES NOT AFFECT SECTION HEIGHT -->
+    <div class="character-wish" id="characterWish" aria-live="polite">
+        Hello! 👋
+    </div>
+
+</div>
+<!-- YUMMI HOME BANNER -->
+<div class="yummi-banner">
+
+    <div class="banner-content">
+        <p class="banner-tag">YOUR CRAVINGS, DELIVERED</p>
+
+        <h2>
+            Good Food.<br>
+            <span>Good Mood!</span>
+        </h2>
+
+        <p class="banner-description">
+            Your favourite treats are just a tap away.
+        </p>
+    </div>
+
+    <div class="banner-image">
+        <img src="images/nonvegmasti.webp" alt="Delicious food">
+    </div>
+
+</div>
+
+<!-- HOME PAGE CONTENT -->
+<main class="home-content">
+    <!-- Add Yummi banner, categories and products here. -->
+
+    <div class="cravings-heading">
+    <h2>Cravings Corner</h2>
+
+    <div class="cravings-icons">
+        <span>🍕</span>
+        <span>🍔</span>
+        <span>🍟</span>
+        <span>🥤</span>
+        <span>🍕</span>
+    </div>
+</div>
+
+
+<!-- Food Categories -->
+<div class="food-categories">
+    <button class="category active">
+        <img src="images/veggielv.webp" alt="All">
+        <span>All</span>
+    </button>
+
+    <button class="category">
+        <img src="images/biriyani.webp" alt="Biryani">
+        <span>Biryanis</span>
+    </button>
+
+    <button class="category">
+        <img src="images/pizza.webp" alt="Pizza">
+        <span>Pizza</span>
+    </button>
+
+    <button class="category">
+        <img src="images/burger.webp" alt="Burger">
+        <span>Burgers</span>
+    </button>
+
+    <button class="category">
+        <img src="images/biriyani.webp" alt="South Indian">
+        <span>South Indian</span>
+    </button>
+
+    <button class="category">
+        <img src="images/chineese.webp" alt="Chinese">
+        <span>Chinese</span>
+    </button>
+
+    <button class="category">
+        <img src="images/dessert.webp" alt="Desserts">
+        <span>Desserts</span>
+    </button>
+
+    <button class="category">
+        <img src="images/drink.webp" alt="Drinks">
+        <span>Drinks</span>
+    </button>
+</div>
+
+<div class="food-love-row">
+
+    <!-- VEGGIE LOVE -->
+    <div class="food-love-box veggie-box">
+        <img src="images/veggielv.webp" alt="Fresh vegetarian food">
+
+        <div class="food-love-sticker veggie-sticker">
+             VEGGIE LOVE
+        </div>
+    </div>
+
+    <!-- NON VEG -->
+    <div class="food-love-box nonveg-box">
+        <img src="images/nonvegmasti.webp" alt="Delicious non vegetarian food">
+
+        <div class="food-love-sticker nonveg-sticker">
+             NON VEG MASTI
+        </div>
+    </div>
+
+</div>
+
+<!-- CATEGORY BOTTOM SHEET -->
+<div id="categoryPage" class="category-page">
+
+    <div class="category-header">
+        <button class="back-btn" onclick="closeCategoryPage()">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <h2 id="categoryTitle">All Foods</h2>
+        <button class="sheet-close" onclick="closeCategoryPage()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div id="categoryContent" class="category-grid"></div>
+
+</div>
+
+
+</main>
+
+<script>
+function getUserLocation() {
+    const name = document.getElementById("locationName");
+    const address = document.getElementById("locationAddress");
+
+    if (!navigator.geolocation) {
+        name.textContent = "Location unavailable";
+        address.textContent = "Your browser does not support location";
+        return;
+    }
+
+    name.textContent = "Finding location...";
+    address.textContent = "Please wait";
+
+    navigator.geolocation.getCurrentPosition(
+        async function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            try {
+                const url =
+                    "https://nominatim.openstreetmap.org/reverse" +
+                    `?format=jsonv2&lat=${lat}&lon=${lon}`;
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Address lookup failed");
+                }
+
+                const data = await response.json();
+                const a = data.address || {};
+
+                const area =
+                    a.neighbourhood ||
+                    a.suburb ||
+                    a.village ||
+                    a.town ||
+                    a.city ||
+                    a.county;
+
+                const city =
+                    a.city || a.town || a.village || a.county;
+
+                name.textContent = area || "Current Location";
+                address.textContent =
+                    [city, a.state].filter(Boolean).join(", ") ||
+                    `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+
+            } catch (error) {
+                name.textContent = "Your Location";
+                address.textContent =
+                    `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+            }
+        },
+
+        function(error) {
+            name.textContent = "Set your location";
+
+            if (error.code === 1) {
+                address.textContent =
+                    "Allow location permission in browser settings";
+            } else if (error.code === 2) {
+                address.textContent = "Device location is unavailable";
+            } else {
+                address.textContent = "Location timed out. Refresh to retry";
+            }
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        }
+    );
+}
+
+function openProfile() {
+    // Add your profile page navigation here.
+}
+
+window.addEventListener("load", getUserLocation);
+
+/* CHARACTER GREETING + SPRINKLE POP */
+document.addEventListener("DOMContentLoaded", function() {
+    const character = document.getElementById("yummiCharacter");
+    const wish = document.getElementById("characterWish");
+
+    if (!character || !wish) {
+        console.error("Character or wish element not found!");
+        return;
+    }
+
+    const greetings = [
+        "Hello! 👋",
+        "Have a lovely day! 💛",
+        "Craving something yummy? 😋",
+        "A little happiness for you! ✨",
+        "Stay sweet! 🍭",
+        "Welcome to Yummi! ❤️"
+    ];
+
+    let greetingIndex = 0;
+    let animationTimer;
+    let wishTimer;
+
+    function greetWithAnimation() {
+        wish.textContent = greetings[greetingIndex];
+
+        /* Restart the message animation on every tap */
+        wish.classList.remove("show");
+        void wish.offsetWidth;
+        wish.classList.add("show");
+
+        /* Restart character bounce */
+        character.classList.remove("bounce");
+        void character.offsetWidth;
+        character.classList.add("bounce");
+
+        clearTimeout(animationTimer);
+        clearTimeout(wishTimer);
+
+        animationTimer = setTimeout(function() {
+            character.classList.remove("bounce");
+        }, 700);
+
+        wishTimer = setTimeout(function() {
+            wish.classList.remove("show");
+        }, 2000);
+
+        greetingIndex = (greetingIndex + 1) % greetings.length;
+    }
+
+    character.addEventListener("click", greetWithAnimation);
+
+    character.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            greetWithAnimation();
+        }
+    });
+});
+</script>
+
+<div id="goldReveal"></div>
+<script>
+const categoryPage = document.getElementById("categoryPage");
+const categoryTitle = document.getElementById("categoryTitle");
+const categoryContent = document.getElementById("categoryContent");
+const goldReveal = document.getElementById("goldReveal");
+
+/* Sample food data — nee images filenames use cheyyi */
+const foodItems = [
+    { name: "Chicken Biryani", category: "biryanis", price: 180, image: "images/chicken-biryani.jpg" },
+    { name: "Veg Biryani", category: "biryanis", price: 140, image: "images/veg-biryani.jpg" },
+    { name: "Pizza", category: "pizza", price: 199, image: "images/pizza.jpg" },
+    { name: "Cheese Pizza", category: "pizza", price: 249, image: "images/cheese-pizza.jpg" },
+    { name: "Chicken Burger", category: "burgers", price: 129, image: "images/burger.jpg" },
+    { name: "Masala Dosa", category: "south-indian", price: 80, image: "images/masala-dosa.jpg" },
+    { name: "Noodles", category: "chinese", price: 120, image: "images/noodles.jpg" },
+    { name: "Chocolate Cake", category: "desserts", price: 99, image: "images/cake.jpg" },
+    { name: "Cold Drink", category: "drinks", price: 40, image: "images/drinks.jpg" }
+];
+
+function showCategory(category, title) {
+    categoryTitle.textContent = title;
+
+    const items = category === "all"
+        ? foodItems
+        : foodItems.filter(item => item.category === category);
+
+    categoryContent.innerHTML = items.length
+        ? items.map(item => `
+            <div class="food-card">
+                <img src="${item.image}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>₹${item.price}</p>
+            </div>
+        `).join("")
+        : "<p>No items available in this category.</p>";
+
+    categoryPage.classList.add("open");
+
+    /* Restart gold animation */
+    goldReveal.classList.remove("show", "hide");
+    void goldReveal.offsetWidth;
+    goldReveal.classList.add("show");
+
+    clearTimeout(window.goldTimer);
+
+    window.goldTimer = setTimeout(() => {
+        goldReveal.classList.add("hide");
+    }, 1500);
+}
+
+function closeCategoryPage() {
+    categoryPage.classList.remove("open");
+    goldReveal.classList.remove("show");
+    goldReveal.classList.add("hide");
+}
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", function () {
+        document.querySelectorAll(".category").forEach(item =>
+            item.classList.remove("active")
+        );
+
+        this.classList.add("active");
+
+        const title = this.querySelector("span").textContent.trim();
+        const category = title === "All"
+            ? "all"
+            : title.toLowerCase().replace(/\s+/g, "-");
+
+        showCategory(
+            category,
+            title === "All" ? "All Foods" : title
+        );
+    });
+});
+</script>
+
+
+</body>
+</html>

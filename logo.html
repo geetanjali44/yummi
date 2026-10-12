@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yummi Logo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg,#ffc26cf3, #f6dfc235);
+
+    overflow-x: hidden;
+}
+
+/* LOGO + CHARACTER CONTAINER */
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    padding: 10px;
+}
+
+/* LOGO */
+
+.logo {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    padding: 20px 20px 50px;
+}
+
+.logo-text {
+    font-family: 'Henny Penny', cursive;
+    font-size: clamp(65px, 15vw, 110px);
+    color: #17105f;
+    font-weight: 400;
+    letter-spacing: -5px;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+/* SIGNATURE CURVE */
+
+.logo::after {
+    content: "";
+    position: absolute;
+    width: 109%;
+    height: 30px;
+    left: -13%;
+    bottom: 57px;
+    border-top: 5px solid #17105f;
+    border-radius: 50%;
+    transform: rotate(-17deg);
+    pointer-events: none;
+}
+
+/* CHARACTER */
+
+.character {
+    display: block;
+    width: 75px;
+    height: auto;
+    max-height: 110px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-left: -30px;
+
+    opacity: 0;
+    animation: characterAppear 0.25s ease 0.1s forwards;
+}
+
+@keyframes characterAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 600px) {
+
+    .logo-container {
+        gap: 0;
+        padding: 5px;
+    }
+
+    .logo {
+        padding: 15px 12px 45px;
+    }
+
+    .logo-text {
+        font-size: clamp(52px, 16vw, 78px);
+        letter-spacing: -4px;
+    }
+
+    .logo::after {
+        width: 108%;
+        height: 25px;
+        left: -10%;
+        bottom: 44px;
+        border-top-width: 4px;
+    }
+
+    .character {
+        width: 48px;
+        max-height: 75px;
+        margin-left: -15px;
+    }
+}
+
+/* EXTRA SMALL MOBILE */
+
+@media screen and (max-width: 360px) {
+
+    .logo {
+        padding: 12px 8px 40px;
+    }
+
+    .logo-text {
+        font-size: 53px;
+        letter-spacing: -3px;
+    }
+
+    .logo::after {
+        bottom: 39px;
+        height: 22px;
+    }
+
+    .character {
+        width: 40px;
+        max-height: 65px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo-container">
+
+    <div class="logo">
+        <span class="logo-text">Yummi</span>
+    </div>
+
+    <img
+        class="character"
+        src="yummi_char.webp"
+        alt="Yummi mascot"
+    >
+
+</div>
+
+<script>
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 3000);
+</script> 
+
+</body>
+</html>
+
