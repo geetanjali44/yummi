@@ -22,8 +22,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg,#ffc26cf3, #f6dfc235);
-
+    background: linear-gradient(180deg, #ffc26cf3, #f6dfc235);
     overflow-x: hidden;
 }
 
@@ -58,19 +57,49 @@ body {
     white-space: nowrap;
 }
 
+/* INDIVIDUAL LETTERS */
+
+.logo-text span {
+    display: inline-block;
+}
+
+/* ONLY i MOVES DOWN */
+
+.logo-text .letter-i {
+    transform: translateY(9px);
+}
+.logo-text .letter-i {
+    display: inline-block;
+    transform: translateY(30px);
+}
+
 /* SIGNATURE CURVE */
 
 .logo::after {
     content: "";
     position: absolute;
-    width: 109%;
-    height: 30px;
-    left: -13%;
-    bottom: 57px;
+    width: 70%;
+    height: 0;
+    left: 23%;
+    bottom: 100px;
     border-top: 5px solid #17105f;
-    border-radius: 50%;
-    transform: rotate(-17deg);
+    transform: none;
     pointer-events: none;
+}
+/* MOBILE */
+@media screen and (max-width: 600px) {
+
+    .logo-text .letter-i {
+        display: inline-block;
+        transform: translateY(13px);
+    }
+
+    .logo::after {
+        width: 70%;
+        left: 23%;
+        bottom: 55px;
+        border-top-width: 4px;
+    }
 }
 
 /* CHARACTER */
@@ -83,21 +112,6 @@ body {
     object-fit: contain;
     flex-shrink: 0;
     margin-left: -30px;
-
-    opacity: 0;
-    animation: characterAppear 0.25s ease 0.1s forwards;
-}
-
-@keyframes characterAppear {
-    from {
-        opacity: 0;
-        transform: translateX(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 /* MOBILE */
@@ -119,10 +133,10 @@ body {
     }
 
     .logo::after {
-        width: 108%;
-        height: 25px;
-        left: -10%;
-        bottom: 44px;
+        width: 65%;
+        height: 35px;
+        left: 25%;
+        bottom: 42px;
         border-top-width: 4px;
     }
 
@@ -164,7 +178,7 @@ body {
 <div class="logo-container">
 
     <div class="logo">
-        <span class="logo-text">Yummi</span>
+        <span class="logo-text"><span>Y</span><span>u</span><span>m</span><span>m</span><span class="letter-i">i</span></span>
     </div>
 
     <img
@@ -174,12 +188,6 @@ body {
     >
 
 </div>
-
-<script>
-    setTimeout(() => {
-        window.location.href = "home.html";
-    }, 3000);
-</script> 
 
 </body>
 </html>
