@@ -4,10 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Yummi Logo</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -17,157 +14,110 @@
 }
 
 body {
+    width: 100%;
     min-height: 100vh;
-    width: 100%;
+    background: #fef8fd;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, #ffc26cf3, #f6dfc235);
-    overflow-x: hidden;
+    overflow: hidden;
 }
-
-/* LOGO + CHARACTER CONTAINER */
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    width: 100%;
-    padding: 10px;
-}
-
-/* LOGO */
 
 .logo {
     position: relative;
-    display: inline-block;
-    flex-shrink: 0;
-    padding: 20px 20px 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotate(-5deg);
 }
 
 .logo-text {
-    font-family: 'Henny Penny', cursive;
-    font-size: clamp(65px, 15vw, 110px);
-    color: #17105f;
-    font-weight: 400;
-    letter-spacing: -5px;
-    position: relative;
-    z-index: 2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 150px;
+    font-weight: 1000;
+    font-style: italic;
+    letter-spacing: -0.075em;
+    line-height: 0.95;
     white-space: nowrap;
+    color: #0d0109;
+    text-align: center;
 }
 
-/* INDIVIDUAL LETTERS */
+.underline {
+    position: relative;
+    width: 30%;
+    height: 20px;
+    left: 21px;
+    bottom: 9px;
+    margin-top: 1px;
 
-.logo-text span {
-    display: inline-block;
+    background: #eb1515;
+
+    transform: skewX(4deg);
+    border-radius: 0;
 }
 
-/* ONLY i MOVES DOWN */
-
-.logo-text .letter-i {
-    transform: translateY(9px);
-}
-.logo-text .letter-i {
-    display: inline-block;
-    transform: translateY(30px);
-}
-
-/* SIGNATURE CURVE */
-
-.logo::after {
-    content: "";
-    position: absolute;
-    width: 70%;
-    height: 0;
-    left: 23%;
-    bottom: 100px;
-    border-top: 5px solid #17105f;
-    transform: none;
-    pointer-events: none;
-}
-/* MOBILE */
-@media screen and (max-width: 600px) {
-
-    .logo-text .letter-i {
-        display: inline-block;
-        transform: translateY(13px);
+/* TABLET */
+@media (min-width: 601px) and (max-width: 900px) {
+    .logo-text {
+        font-size: 120px;
     }
 
-    .logo::after {
-        width: 70%;
-        left: 23%;
-        bottom: 55px;
-        border-top-width: 4px;
+    .underline {
+        width: 35%;
+        height: 16px;
+        left: 20px;
+        bottom: 9px;
     }
-}
-
-/* CHARACTER */
-
-.character {
-    display: block;
-    width: 75px;
-    height: auto;
-    max-height: 110px;
-    object-fit: contain;
-    flex-shrink: 0;
-    margin-left: -30px;
 }
 
 /* MOBILE */
-
-@media screen and (max-width: 600px) {
-
-    .logo-container {
-        gap: 0;
-        padding: 5px;
-    }
-
+@media (max-width: 600px) {
     .logo {
-        padding: 15px 12px 45px;
+        width: 100%;
+        transform: rotate(-5deg);
     }
 
     .logo-text {
-        font-size: clamp(52px, 16vw, 78px);
-        letter-spacing: -4px;
+        font-size: 26vw;
+        letter-spacing: -0.075em;
+        line-height: 0.95;
     }
 
-    .logo::after {
-        width: 65%;
-        height: 35px;
-        left: 25%;
-        bottom: 45px;
-        border-top-width: 4px;
-    }
-
-    .character {
-        width: 48px;
-        max-height: 75px;
-        margin-left: -15px;
+    .underline {
+       width: 78%;
+        height: 3vw;
+        max-height: 18px;
+        min-height: 8px;
+        left: 4vw;
+        bottom: 1.5vw;
+        margin-top: 0;
     }
 }
 
-/* EXTRA SMALL MOBILE */
-
-@media screen and (max-width: 360px) {
-
-    .logo {
-        padding: 12px 8px 40px;
-    }
-
+/* SMALL MOBILE */
+@media (max-width: 360px) {
     .logo-text {
-        font-size: 53px;
-        letter-spacing: -3px;
+        font-size: 25vw;
     }
 
-    .logo::after {
-        bottom: 39px;
-        height: 22px;
+    .underline {
+        width: 38%;
+        height: 8px;
+        left: 3vw;
+        bottom: 2vw;
     }
-
-    .character {
-        width: 40px;
-        max-height: 65px;
+}
+.last-i {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    color: #eb1515;
+}
+@media (max-width: 600px) {
+    .last-i {
+        top: 3.5vw;
     }
 }
 </style>
@@ -175,18 +125,9 @@ body {
 
 <body>
 
-<div class="logo-container">
-
-    <div class="logo">
-        <span class="logo-text"><span>Y</span><span>u</span><span>m</span><span>m</span><span class="letter-i">i</span></span>
-    </div>
-
-    <img
-        class="character"
-        src="yummi_char.webp"
-        alt="Yummi mascot"
-    >
-
+<div class="logo">
+    <div class="logo-text">Yumm<span class="last-i">i</span></div>
+    <div class="underline"></div>
 </div>
 <script>
     setTimeout(() => {
@@ -195,4 +136,3 @@ body {
 </script>
 </body>
 </html>
-
