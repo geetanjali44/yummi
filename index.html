@@ -39,9 +39,17 @@ body {
     transform: rotate(-5deg);
 }
 
+@font-face {
+    font-family: "YummiFont";
+    src: url("fonts/yummi-font.woff2") format("woff2");
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 .logo-text {
     display: inline-block;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "YummiFont", sans-serif;
     font-size: 150px;
     font-weight: 900;
     font-style: italic;
@@ -148,11 +156,7 @@ body {
     <div class="underline"></div>
 </div>
 
-<script>
-    setTimeout(() => {
-        window.location.href = "home.html";
-    }, 3000);
-</script>
+
 
 </body>
 </html>
