@@ -9,6 +9,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <style>
 * {
     margin: 0;
@@ -47,11 +50,11 @@ body {
 }
 
 .logo-text {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Anton', sans-serif;
     font-size: clamp(65px, 15vw, 110px);
     color: black;
     font-weight: 1000;
-    letter-spacing: -5px;
+    letter-spacing: 9px;
     position: relative;
     z-index: 2;
     white-space: nowrap;
@@ -89,9 +92,9 @@ body {
     position: absolute;
     width: 82%;
     height: 90px;
-    left: 12.5%;
+    left: 12%;
     rotate: -5deg;
-    bottom: -24px;
+    bottom: -26px;
     border-top: 18px solid red; /* Line thickness increased */
     transform: none;
     pointer-events: none;
@@ -153,7 +156,7 @@ body {
 
     .logo-text {
         font-size: clamp(52px, 16vw, 78px);
-        letter-spacing: -4px;
+        letter-spacing: 4px;
     }
 
     .logo::after {
@@ -213,11 +216,7 @@ body {
 
 </div>
 
-<script>
-    setTimeout(() => {
-        window.location.href = "home.html";
-    }, 3000);
-</script>
+
 
 </body>
 </html>
