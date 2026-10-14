@@ -3,7 +3,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Yummi Logo</title>
 
 <style>
@@ -13,14 +15,19 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
     background: #fef8fd;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 .logo {
@@ -33,27 +40,36 @@ body {
 }
 
 .logo-text {
+    display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 150px;
-    font-weight: 1000;
+    font-weight: 900;
     font-style: italic;
     letter-spacing: -0.075em;
     line-height: 0.95;
     white-space: nowrap;
     color: #0d0109;
     text-align: center;
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.last-i {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    color: #eb1515;
 }
 
 .underline {
+    flex-shrink: 0;
     position: relative;
     width: 30%;
     height: 20px;
     left: 21px;
     bottom: 9px;
     margin-top: 1px;
-
     background: #eb1515;
-
     transform: skewX(4deg);
     border-radius: 0;
 }
@@ -62,6 +78,10 @@ body {
 @media (min-width: 601px) and (max-width: 900px) {
     .logo-text {
         font-size: 120px;
+    }
+
+    .last-i {
+        top: 16px;
     }
 
     .underline {
@@ -76,17 +96,22 @@ body {
 @media (max-width: 600px) {
     .logo {
         width: 100%;
-        transform: rotate(-5deg);
     }
 
     .logo-text {
+        /* Stable proportional size for different phones */
         font-size: 26vw;
         letter-spacing: -0.075em;
         line-height: 0.95;
+        font-weight: 900;
+    }
+
+    .last-i {
+        top: 3.5vw;
     }
 
     .underline {
-       width: 78%;
+        width: 78%;
         height: 3vw;
         max-height: 18px;
         min-height: 8px;
@@ -102,22 +127,15 @@ body {
         font-size: 25vw;
     }
 
+    .last-i {
+        top: 3.5vw;
+    }
+
     .underline {
-        width: 38%;
+        width: 78%;
         height: 8px;
         left: 3vw;
         bottom: 2vw;
-    }
-}
-.last-i {
-    display: inline-block;
-    position: relative;
-    top: 20px;
-    color: #eb1515;
-}
-@media (max-width: 600px) {
-    .last-i {
-        top: 3.5vw;
     }
 }
 </style>
@@ -129,10 +147,12 @@ body {
     <div class="logo-text">Yumm<span class="last-i">i</span></div>
     <div class="underline"></div>
 </div>
+
 <script>
     setTimeout(() => {
         window.location.href = "home.html";
     }, 3000);
 </script>
+
 </body>
 </html>
